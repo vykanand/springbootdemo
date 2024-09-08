@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.18'  // Last version supporting Java 8
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+group = 'com.my.appy'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+jar {
+    archiveBaseName.set('demoapp')
+    // Optional: you can also specify the version and extension if needed
+    // archiveVersion.set('1.0.0')
+    // archiveExtension.set('jar')
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	implementation 'mysql:mysql-connector-java:8.0.33'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    runtimeOnly 'com.h2database:h2'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
